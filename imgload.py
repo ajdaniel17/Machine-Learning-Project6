@@ -12,9 +12,6 @@ filenamesWorms = glob.glob(path2 + '/*.png')
 images1 = [cv.imread(img) for img in filenamesNoWorms]
 images2 = [cv.imread(img) for img in filenamesWorms]
 
-# allimage = []
-# allimage.append(images1)
-# allimage.append(images2)
 allimage = np.concatenate((images1,images2))
 
 path = "C:/Users/ajdan/Documents/PR-ML/Machine Learning/Project 4 ML/Machine-Learning-Project4/Training/C. elegans/thing/"
