@@ -41,7 +41,7 @@ class WormsAndNoWormsDataSet(Dataset):
 
         return (image, label)
 
-cElegansDataset = WormsAndNoWormsDataSet(path='C.ElegansData', transform=ToTensor())
+cElegansDataset = WormsAndNoWormsDataSet(path='C. elegans', transform=ToTensor())
 
 trainSet, testSet = random_split(cElegansDataset, [8301, 2075])
 
