@@ -1,6 +1,7 @@
 import torch
 import numpy as np
 import cv2 as cv
+import time
 from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
 from torch.utils.data import random_split
@@ -121,8 +122,14 @@ def test(cnn, loader):
     print(ConfusionMatrix)
 
 if __name__ == '__main__':
+    # startTrainTime = time.time()
     # train(epochs, cnn, trainLoader)
     cnn = torch.load('cElegansModel.pt')
+    # endTrainTime = time.time() - startTrainTime
+    # print(endTrainTime)
+    startTestTime = time.time()
     test(cnn, trainLoader)
     test(cnn, testLoader)
-    torch.save(cnn, 'cElegansModel.pt')
+    endTestTime = time.time() - startTestTime
+    print(endTestTime)
+    # torch.save(cnn, 'cElegansModel.pt')
