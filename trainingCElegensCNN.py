@@ -107,8 +107,21 @@ def test(cnn, loader):
             testOutput = cnn(images)
             predY = torch.max(testOutput, 1)[1].data.squeeze()
             accuracy = (predY == labels).sum().item() / float(labels.size(0))
-        
+            
+        ConfusionMatrix = np.zeros((2,2))
+        for i in range(len(predY)):
+            if labels[i] == 0:
+                if predY[i] == 0:
+                    ConfusionMatrix[0][0] += 1
+                elif predY[i] == 1:
+                    ConfusionMatrix[1][0] += 1
+            elif labels[i] == 1:
+                if predY[i] == 0:
+                    ConfusionMatrix[0][1] += 1
+                elif predY[i] == 1:
+                    ConfusionMatrix[1][1] += 1
     print(accuracy)
+    print(ConfusionMatrix)
 
 if __name__ == '__main__':
     # train(epochs, cnn, trainLoader)
