@@ -1,11 +1,8 @@
 import numpy as np
 import glob
 import cv2 as cv
-import libsvm.svmutil as svm
 from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
-from torch.utils.data import random_split
-from torchvision import datasets
 from torchvision.transforms import ToTensor
 import torch
 

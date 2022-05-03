@@ -4,7 +4,6 @@ import cv2 as cv
 from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
 from torch.utils.data import random_split
-from torchvision import datasets
 from torchvision.transforms import ToTensor
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -100,15 +99,13 @@ def train(epochs, cnn, loader):
 def test(cnn, loader):
     cnn.eval()
 
-    with torch.no_grad():
-        correct = 0
-        total = 0
-        for images, labels in loader:
-            testOutput = cnn(images)
-            predY = torch.max(testOutput, 1)[1].data.squeeze()
-            accuracy = (predY == labels).sum().item() / float(labels.size(0))
-            
-        ConfusionMatrix = np.zeros((2,2))
+    correct = 0
+    total = 0
+    ConfusionMatrix = np.zeros((2,2))
+    for images, labels in loader:
+        testOutput = cnn(images)
+        predY = torch.max(testOutput, 1)[1].data.squeeze()
+        accuracy = (predY == labels).sum().item() / float(labels.size(0))
         for i in range(len(predY)):
             if labels[i] == 0:
                 if predY[i] == 0:
