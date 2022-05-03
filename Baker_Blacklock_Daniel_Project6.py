@@ -8,7 +8,6 @@ import torch
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-
 class WormsDataSet(Dataset):
     def __init__(self,images = [], transform=None,*args):
         self.transform = transform
@@ -65,13 +64,12 @@ class CNN(torch.nn.Module):
 cnn = CNN()
 
 if __name__ == '__main__':
- 
     path = input("Please enter the directory path containing test images:\n")
     filenames = glob.glob(path + '/*.png')
     images = [cv.imread(img) for img in filenames]
     cElegansDataset = WormsDataSet(images=images, transform=ToTensor())
     cnn = torch.load('cElegansModel.pt')
-    Loader = DataLoader(cElegansDataset, batch_size=1000, shuffle=True)
+    Loader = DataLoader(cElegansDataset, batch_size=len(filenames), shuffle=False)
     labels = test(cnn,Loader)
     print(" ___________________________________ ")
     print("|                    |              |")
